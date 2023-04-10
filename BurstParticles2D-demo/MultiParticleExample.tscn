@@ -147,6 +147,7 @@ point_count = 3
 rotation = 0.385718
 scale = Vector2(0.159, 0.159)
 script = ExtResource("1_xgldk")
+repeat = true
 metadata/_edit_group_ = true
 
 [node name="Ring" type="Node2D" parent="."]
