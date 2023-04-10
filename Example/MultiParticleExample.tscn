@@ -1,10 +1,10 @@
 [gd_scene load_steps=37 format=3 uid="uid://drwp60x7q7wtx"]
 
-[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_netdn"]
-[ext_resource type="Shader" path="res://GradientMap.gdshader" id="2_pagiq"]
-[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_hudgc"]
-[ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/Example/ring.png" id="4_ys2x2"]
-[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/Example/orb.png" id="5_hrt3u"]
+[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_xgldk"]
+[ext_resource type="Shader" path="res://GradientMap.gdshader" id="2_n76rk"]
+[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_wh1l3"]
+[ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/Example/ring.png" id="4_rwjrl"]
+[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/Example/orb.png" id="5_l8jsc"]
 
 [sub_resource type="Gradient" id="Gradient_yxb4l"]
 interpolation_mode = 2
@@ -15,7 +15,7 @@ colors = PackedColorArray(0.670039, 0.470735, 0.542787, 0, 1, 0.625337, 0.454109
 gradient = SubResource("Gradient_yxb4l")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pjcuo"]
-shader = ExtResource("2_pagiq")
+shader = ExtResource("2_n76rk")
 shader_parameter/color_offset = 0.0
 shader_parameter/gradient = SubResource("GradientTexture1D_fn0fs")
 
@@ -127,7 +127,7 @@ _data = [Vector2(0, 0.236364), 0.0, 0.0, 0, 0, Vector2(0.115702, 1), 0.0, 0.0, 0
 point_count = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5q3rr"]
-shader = ExtResource("2_pagiq")
+shader = ExtResource("2_n76rk")
 shader_parameter/color_offset = 0.0
 shader_parameter/gradient = SubResource("GradientTexture1D_dvjid")
 
@@ -156,7 +156,7 @@ point_count = 3
 [node name="MultiParticleExample" type="Node2D"]
 rotation = 0.385718
 scale = Vector2(0.159, 0.159)
-script = ExtResource("1_netdn")
+script = ExtResource("1_xgldk")
 metadata/_edit_group_ = true
 
 [node name="Ring" type="Node2D" parent="."]
@@ -164,10 +164,11 @@ modulate = Color(1, 1, 1, 0.12549)
 show_behind_parent = true
 material = SubResource("ShaderMaterial_pjcuo")
 position = Vector2(0.000976563, 0)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 1
 lifetime = 0.75
-texture = ExtResource("4_ys2x2")
+repeat = true
+texture = ExtResource("4_rwjrl")
 image_scale = 0.667
 gradient = SubResource("GradientTexture1D_rfxqi")
 distance = 0.0
@@ -182,12 +183,13 @@ color_offset_curve = SubResource("Curve_jjlod")
 show_behind_parent = true
 material = SubResource("ShaderMaterial_67i43")
 position = Vector2(0.000976563, 0)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 32
 lifetime = 0.75
 lifetime_randomness = 0.745
 preprocess_amount = 0.023
-texture = ExtResource("5_hrt3u")
+repeat = true
+texture = ExtResource("5_l8jsc")
 image_scale = 0.173
 gradient = SubResource("GradientTexture1D_dvjid")
 image_scale_randomness = 0.7
@@ -207,10 +209,11 @@ color_offset_curve = SubResource("Curve_8y1cm")
 show_behind_parent = true
 material = SubResource("ShaderMaterial_pjcuo")
 position = Vector2(0.000976563, -0.00012207)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 1
 lifetime = 0.75
-texture = ExtResource("5_hrt3u")
+repeat = true
+texture = ExtResource("5_l8jsc")
 image_scale = 11.455
 gradient = SubResource("GradientTexture1D_mth2w")
 direction = Vector2(0, 1)
@@ -228,10 +231,11 @@ color_offset_curve = SubResource("Curve_8kxii")
 show_behind_parent = true
 material = SubResource("ShaderMaterial_pjcuo")
 position = Vector2(0.000976563, 0.00012207)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 1
 lifetime = 0.75
-texture = ExtResource("4_ys2x2")
+repeat = true
+texture = ExtResource("4_rwjrl")
 image_scale = 0.399
 gradient = SubResource("GradientTexture1D_rfxqi")
 distance = 0.0
@@ -246,10 +250,11 @@ color_offset_curve = SubResource("Curve_jjlod")
 show_behind_parent = true
 material = SubResource("ShaderMaterial_pjcuo")
 position = Vector2(0.000976563, -0.00012207)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 1
 lifetime = 0.75
-texture = ExtResource("5_hrt3u")
+repeat = true
+texture = ExtResource("5_l8jsc")
 image_scale = 15.283
 gradient = SubResource("GradientTexture1D_mth2w")
 distance = 0.0
@@ -265,11 +270,12 @@ color_offset_curve = SubResource("Curve_8kxii")
 show_behind_parent = true
 material = SubResource("ShaderMaterial_5q3rr")
 position = Vector2(0.000488281, 0)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 24
 lifetime = 0.75
 lifetime_randomness = 0.789
-texture = ExtResource("5_hrt3u")
+repeat = true
+texture = ExtResource("5_l8jsc")
 image_scale = 0.435
 gradient = SubResource("GradientTexture1D_i0g4n")
 image_scale_randomness = 0.666
@@ -290,11 +296,12 @@ color_offset_curve = SubResource("Curve_8y1cm")
 show_behind_parent = true
 material = SubResource("ShaderMaterial_5q3rr")
 position = Vector2(0.000488281, 0)
-script = ExtResource("3_hudgc")
+script = ExtResource("3_wh1l3")
 num_particles = 24
 lifetime = 0.75
 lifetime_randomness = 0.789
-texture = ExtResource("5_hrt3u")
+repeat = true
+texture = ExtResource("5_l8jsc")
 image_scale = 0.435
 gradient = SubResource("GradientTexture1D_i0g4n")
 image_scale_randomness = 0.666
