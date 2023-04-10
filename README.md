@@ -1,5 +1,7 @@
 # BurstParticles2D
 
+![icon](https://user-images.githubusercontent.com/43023911/231013804-91936f5b-1803-4096-a5ff-513062ae1aa7.svg)
+
 Make cool, chunky one-shot particle effects for Godot 4.x with textures, curves and gradients. BurstParticles2D uses GDScript, RenderingServer and tweens so it is not as fast as built-in particle solutions, but has finer control and some features that Godot lacks out of the box.
 
 https://user-images.githubusercontent.com/43023911/231001149-7ffd5313-05b3-41d2-aa5c-a6a6d7c090fc.mp4
