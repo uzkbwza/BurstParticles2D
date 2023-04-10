@@ -14,3 +14,7 @@ config/name="BurstParticles2D"
 run/main_scene="res://BurstParticles2D-demo/MultiParticleExample.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/BurstParticles2D/plugin.cfg")

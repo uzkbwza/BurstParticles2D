@@ -4,7 +4,7 @@ extends Node2D
 
 class_name BurstParticles2D
 
-const SHADER = preload("./BurstParticleGradientMap.gdshader")
+const SHADER = preload("BurstParticleGradientMap.gdshader")
 
 signal finished_burst
 

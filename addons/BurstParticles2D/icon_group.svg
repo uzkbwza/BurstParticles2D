@@ -5,7 +5,7 @@
    width="16"
    version="1.1"
    id="svg87"
-   sodipodi:docname="icon.svg"
+   sodipodi:docname="icon_group.svg"
    inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -13,6 +13,16 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs91">
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect1406"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect1406"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
     <inkscape:path-effect
        effect="powermask"
        id="path-effect347"
@@ -77,6 +87,24 @@
          values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
          in="fbSourceGraphic" />
     </filter>
+    <filter
+       id="mask-powermask-path-effect1464_inverse"
+       inkscape:label="filtermask-powermask-path-effect1464"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect1464_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect1464_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="namedview89"
@@ -89,34 +117,22 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:lockguides="true"
-     inkscape:zoom="45.254834"
-     inkscape:cx="6.0214562"
-     inkscape:cy="7.7118833"
+     inkscape:zoom="64"
+     inkscape:cx="8.109375"
+     inkscape:cy="8.8125"
      inkscape:window-width="2560"
      inkscape:window-height="1369"
-     inkscape:window-x="2552"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg87" />
+  <g
+     id="g1556" />
   <path
-     style="display:inline;fill:#8da5f3;fill-opacity:1;stroke-width:1.9805"
-     d="M 3.5733111,12.577509 7.4416269,12.264898 2.1787401,7.1830833 8.031486,10.186118 1.1253434,1.0357671 10.62354,7.7787939 8.2737069,2.3810842 12.712552,7.715799 12.904463,4.11673 c 5.872576,14.167609 -2.616744,11.431135 -9.3311519,8.460779 z"
-     id="path1282"
+     id="path1570-5"
+     clip-path="none"
+     mask="none"
+     style="display:inline;fill:#8da5f3;fill-opacity:1;stroke-width:1.64209"
      inkscape:label="path375"
-     sodipodi:nodetypes="cccccccccc"
-     clip-path="none"
-     mask="none" />
-  <text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:7.73333px;font-family:Roboto;-inkscape-font-specification:'Roboto, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:none;fill:#000000;fill-opacity:1;stroke-width:0.644444"
-     x="8.1999998"
-     y="13.669791"
-     id="text345"
-     clip-path="none"
-     mask="none"><tspan
-       sodipodi:role="line"
-       id="tspan343"
-       x="8.1999998"
-       y="13.669791"
-       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:7.73333px;font-family:Roboto;-inkscape-font-specification:'Roboto, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke-width:0.644444">G</tspan></text>
+     d="M 5.3882832,0.44229822 8.2945332,4.2606576 5.8316425,3.0087045 8.0464863,5.1278451 6.4175801,5.2587045 C 9.2443862,6.498334 12.819658,7.6400747 10.347267,1.7274545 L 10.265236,3.2294076 8.3980488,1.0047982 9.3863301,3.2567514 Z M 4.0582051,4.0087045 9.7847675,11.596595 6.4468769,10.981361 9.2945332,13.319252 6.0875019,13.579017 C 11.654589,16.041816 18.692933,18.310122 13.82383,6.563392 L 13.665627,9.547767 10.812111,6.3270638 11.933205,9.6005014 Z M 0.54258003,5.9794076 3.4507832,9.797767 0.9859394,8.5438607 3.2027363,10.664955 1.5738301,10.795814 c 2.8268061,1.23963 6.4001249,2.38137 3.9277343,-3.5312502 L 5.4214863,8.766517 3.5523457,6.5399545 4.5425801,8.7938607 Z" />
 </svg>

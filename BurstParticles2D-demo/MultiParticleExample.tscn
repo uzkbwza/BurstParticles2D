@@ -311,4 +311,3 @@ y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(1, 1)
