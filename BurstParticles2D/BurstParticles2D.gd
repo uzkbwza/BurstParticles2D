@@ -25,12 +25,22 @@ class Particle extends RefCounted:
 	var scale = 1.0
 	var position: Vector2:
 		get:
-			return Utils.ang2vec(dir) * distance
+			return Vector2.from_angle(dir) * distance
 	var offset: Vector2 = Vector2()
 	
 	func kill():
 		RenderingServer.free_rid(self.rid)
 		dead = true
+
+class BurstParticlesRng extends RandomNumberGenerator:
+	func percent(percent: float) -> bool:
+		return self.randi() % 100 < percent
+
+	func exponential(param : float = 1.0) -> float:
+		return ln(1.0 - randf())/(-param)
+
+	func ln(arg : float) -> float:
+		return log(arg)/log(exp(1))
 
 @export_category("Particles")
 @export var num_particles = 10
@@ -91,7 +101,7 @@ class Particle extends RefCounted:
 @export var alpha_curve: Curve = null
 
 var particles: Array[Particle] = []
-var rng = BetterRng.new()
+var rng = BurstParticlesRng.new()
 var shared_material = null
 var finished = true
 var tween
