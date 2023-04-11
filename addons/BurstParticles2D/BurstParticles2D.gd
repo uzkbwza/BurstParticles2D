@@ -14,6 +14,7 @@ class Particle extends RefCounted:
 	var distance: float = 0
 	var max_distance: float = 0
 	var dir: float = 0
+	var angle: float = 0
 	var material = null
 	var scale_modifier := 1.0
 	var x_scale := 1.0
@@ -25,7 +26,7 @@ class Particle extends RefCounted:
 	var scale = 1.0
 	var position: Vector2:
 		get:
-			return Vector2.from_angle(dir) * distance
+			return Vector2.from_angle(dir) * distance + offset
 	var offset: Vector2 = Vector2()
 	
 	func kill():
@@ -57,6 +58,7 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export var image_scale = 1.0
 @export var gradient : GradientTexture1D
 @export_range(0.0, 1.0) var image_scale_randomness = 0.0
+@export var angle_degrees = 0.0
 
 # enable this if you are using a lot of particles and experience a stutter on instancing. 
 # since instance uniforms aren't implemented in canvas_item shaders yet, each particle needs its own
@@ -90,10 +92,10 @@ class BurstParticlesRng extends RandomNumberGenerator:
 # the launch direction
 @export var distance_falloff_curve : Curve = null 
 
-
 @export_category("Tween Curves")
 @export var distance_curve : Curve = null
 @export var offset_curve: Curve = null
+@export var angle_curve: Curve = null
 @export var scale_curve : Curve = null
 @export var x_scale_curve : Curve = null
 @export var y_scale_curve : Curve = null
@@ -183,6 +185,7 @@ func burst():
 			particle.dir = p_dir
 			particle.scale_modifier = 1.0 - rng.randf_range(0.0, image_scale_randomness)
 			particle.max_distance += start_radius
+			particle.angle = deg_to_rad(angle_degrees)
 			
 			var update_functions = _get_update_functions(particle)
 
@@ -252,6 +255,11 @@ func _get_update_functions(particle):
 			particle.scale = Vector2(image_scale * particle.x_scale, image_scale * particle.y_scale) * particle.scale_modifier
 		)
 	
+	if angle_curve:
+		update_functions.append(func(t, particle):
+			particle.angle = deg_to_rad(angle_degrees) * angle_curve.sample_baked(t)
+		)
+	
 	if offset_curve:
 		if !global_offset:
 			update_functions.append(func(t, particle):
@@ -270,11 +278,11 @@ func _get_update_functions(particle):
 
 	if align_sprite_rotation:
 		update_functions.append(func(_t, particle):
-			RenderingServer.canvas_item_set_transform(particle.rid, Transform2D().translated(_center_texture()).scaled(particle.scale).translated(Vector2.RIGHT * particle.distance).rotated(particle.dir).translated(particle.offset))
+			RenderingServer.canvas_item_set_transform(particle.rid, Transform2D().translated(_center_texture()).rotated(particle.angle).scaled(particle.scale).translated(Vector2.RIGHT * particle.distance).rotated(particle.dir).translated(particle.offset))
 		)
 	else:
 		update_functions.append(func(_t, particle):
-			RenderingServer.canvas_item_set_transform(particle.rid, Transform2D().translated(_center_texture()).scaled(particle.scale).translated(particle.position).translated(particle.offset))
+			RenderingServer.canvas_item_set_transform(particle.rid, Transform2D().translated(_center_texture()).rotated(particle.angle).scaled(particle.scale).translated(particle.position))
 		)
 	return update_functions
 
