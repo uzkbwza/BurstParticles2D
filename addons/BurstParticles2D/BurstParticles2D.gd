@@ -63,6 +63,8 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var angle_degrees = 0.0
 @export_range(0.0, 1.0) var angle_randomness = 0.0
 @export var randomly_flip_angle = false
+@export_range(-1.0, 1.0) var color_offset_high = 0.0
+@export_range(-1.0, 1.0) var color_offset_low = -1.0
 
 # enable this if you are using a lot of particles and experience a stutter on instancing. 
 # since instance uniforms aren't implemented in canvas_item shaders yet, each particle needs its own
@@ -193,6 +195,8 @@ func burst():
 			particle.max_distance += start_radius
 			particle.angle = p_angle
 			particle.max_angle = p_angle
+			particle.color_offset = color_offset_high
+			
 			if randomly_flip_angle and rng.randi() % 2 == 0:
 				particle.angle *= -1
 				particle.max_angle *= -1
@@ -236,17 +240,26 @@ func _get_update_functions(particle):
 	if y_scale_curve:
 		update_functions.append(func(t, particle): particle.y_scale = y_scale_curve.sample_baked(t))
 	
-	if color_offset_curve and use_gradient_map:
-		if !share_material:
-			update_functions.append(func(t, particle):
-				particle.color_offset = color_offset_curve.sample_baked(t)
-				RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", particle.color_offset)
-			)
+	if use_gradient_map:
+		if color_offset_curve:
+			if !share_material:
+				update_functions.append(func(t, particle):
+					RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", lerp(color_offset_low, color_offset_high, color_offset_curve.sample_baked(t)))
+				)
+			else:
+				update_functions.append(func(t, particle):
+					RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", lerp(color_offset_low, color_offset_high, color_offset_curve.sample_baked(self.t)))
+				)
 		else:
-			update_functions.append(func(t, particle):
-				RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", color_offset_curve.sample_baked(self.t))
-			)
-	
+			if !share_material:
+				update_functions.append(func(t, particle):
+					RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", lerp(color_offset_high, color_offset_low, t))
+				)
+			else:
+				update_functions.append(func(t, particle):
+					RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", lerp(color_offset_high, color_offset_low, self.t))
+				)
+
 	if alpha_curve:
 		update_functions.append(func(t, particle):
 			particle.alpha = alpha_curve.sample_baked(t)

@@ -23,8 +23,7 @@ _data = [Vector2(0, 0.654545), 0.0, 0.0, 0, 0]
 point_count = 1
 
 [sub_resource type="Curve" id="Curve_jjlod"]
-min_value = -1.0
-_data = [Vector2(0, 0.745455), 0.0, -7.40501, 0, 0, Vector2(0.107438, -0.672727), -1.91304, -1.91304, 0, 0, Vector2(0.596694, -1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -8.00951, 0, 1, Vector2(0.103286, 0.172727), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.192623, 0.0, 1, 0]
 point_count = 3
 
 [sub_resource type="Shader" id="Shader_4ich8"]
@@ -78,9 +77,8 @@ _data = [Vector2(0, 0.290909), 0.0, 0.0, 0, 0, Vector2(1, 0.745454), 0.0, 0.0, 0
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_8y1cm"]
-min_value = -1.0
-_data = [Vector2(0, -0.0181818), 0.0, 4.53968, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 8.69388, 0, 1, Vector2(0.115023, 1), -0.252569, -0.252569, 0, 0, Vector2(1, 0), -1.12997, 0.0, 1, 0]
+point_count = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pjcuo"]
 
@@ -106,7 +104,7 @@ point_count = 4
 
 [sub_resource type="Curve" id="Curve_8kxii"]
 min_value = -1.0
-_data = [Vector2(0, 0.0363637), 0.0, 0.0, 0, 0, Vector2(0.581818, -1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.579812, -0.0181818), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_pferf"]
