@@ -143,6 +143,7 @@ func _center_texture():
 func burst():
 	if !finished:
 		_finish()
+	
 	finished = false
 	# init particles
 	if share_material and use_gradient_map:

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ovw18l4dc1fv"
-path="res://.godot/imported/orb.png-f065b36685de1f9c1afc6cba6eba74ab.ctex"
+path="res://.godot/imported/orb.png-ac63837fe3360f53a8a1139f9f89387b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BurstParticles2D-demo/orb.png"
-dest_files=["res://.godot/imported/orb.png-f065b36685de1f9c1afc6cba6eba74ab.ctex"]
+source_file="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png"
+dest_files=["res://.godot/imported/orb.png-ac63837fe3360f53a8a1139f9f89387b.ctex"]
 
 [params]
 

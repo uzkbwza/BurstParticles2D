@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2lceccxwhwet"
-path="res://.godot/imported/ring.png-2384df25e3bc2cd249f0bdbee285a3c3.ctex"
+path="res://.godot/imported/ring.png-2f9ddefa1c27aebf0145d70e76eecc08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BurstParticles2D-demo/ring.png"
-dest_files=["res://.godot/imported/ring.png-2384df25e3bc2cd249f0bdbee285a3c3.ctex"]
+source_file="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png"
+dest_files=["res://.godot/imported/ring.png-2f9ddefa1c27aebf0145d70e76eecc08.ctex"]
 
 [params]
 
