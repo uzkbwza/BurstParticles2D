@@ -306,7 +306,7 @@ color_offset_curve = SubResource("Curve_8y1cm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="BurstParticles2D" type="Node2D" parent="."]
+[node name="EmptyParticle" type="Node2D" parent="."]
 script = ExtResource("3_wh1l3")
 repeat = true
 texture = null
