@@ -4,7 +4,7 @@ extends Node2D
 
 class_name BurstParticleGroup2D
 
-@export var repeat = false
+@export var repeat = true
 @export var free_when_finished = true
 @export var autostart = true
 

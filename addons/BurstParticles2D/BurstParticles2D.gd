@@ -53,7 +53,7 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export var autostart = true
 
 @export_category("Texture")
-@export var texture: Texture2D
+@export var texture: Texture2D = preload("orb_small.png")
 @export var image_scale = 1.0
 @export var gradient : GradientTexture1D
 @export_range(0.0, 1.0) var image_scale_randomness = 0.0
