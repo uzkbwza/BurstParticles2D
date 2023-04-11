@@ -60,7 +60,7 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export var image_scale = 1.0
 @export_range(0.0, 1.0) var image_scale_randomness = 0.0
 @export var gradient : GradientTexture1D
-@export_range(-360, 360.0, 1.0, "or_greater", "or_less") var angle_degrees = 0.0
+@export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var angle_degrees = 0.0
 @export_range(0.0, 1.0) var angle_randomness = 0.0
 @export var randomly_flip_angle = false
 
