@@ -1,12 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://drwp60x7q7wtx"]
+[gd_scene load_steps=34 format=3 uid="uid://drwp60x7q7wtx"]
 
 [ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_xgldk"]
-[ext_resource type="Shader" path="res://GradientMap.gdshader" id="2_n76rk"]
 [ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_wh1l3"]
 [ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="4_rwjrl"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="5_l8jsc"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjcuo"]
 
 [sub_resource type="Gradient" id="Gradient_j0q7a"]
 interpolation_mode = 2
@@ -85,6 +82,8 @@ min_value = -1.0
 _data = [Vector2(0, -0.0181818), 0.0, 4.53968, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjcuo"]
+
 [sub_resource type="Gradient" id="Gradient_eq34j"]
 offsets = PackedFloat32Array(0, 0.689046, 0.805654, 1)
 colors = PackedColorArray(1, 1, 1, 0, 0.964706, 0, 0.682353, 0.721569, 0.986606, 0.657213, 0.876707, 0.85002, 1, 1, 1, 1)
@@ -116,8 +115,6 @@ _data = [Vector2(0, 0.236364), 0.0, 0.0, 0, 0, Vector2(0.115702, 1), 0.0, 0.0, 0
 point_count = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5q3rr"]
-render_priority = 0
-shader = ExtResource("2_n76rk")
 
 [sub_resource type="Gradient" id="Gradient_qmkag"]
 interpolation_mode = 2
@@ -150,7 +147,6 @@ metadata/_edit_group_ = true
 [node name="Ring" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.12549)
 show_behind_parent = true
-material = SubResource("ShaderMaterial_pjcuo")
 position = Vector2(0.000976563, 0)
 script = ExtResource("3_wh1l3")
 num_particles = 1
@@ -309,3 +305,8 @@ y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BurstParticles2D" type="Node2D" parent="."]
+script = ExtResource("3_wh1l3")
+repeat = true
+texture = null

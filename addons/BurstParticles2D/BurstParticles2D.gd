@@ -153,39 +153,42 @@ func burst():
 		particle.kill()
 	particles = []
 
-	for i in range(num_particles):
-		var particle = _create_particle()
-		particles.append(particle)
-
-	# start burst
-	tween = create_tween()
-	tween.set_parallel(true)
-
-	var update_method: Callable = _update_particle if !Engine.is_editor_hint() else _update_particle_editor
 	
-	for i in range(num_particles):
-		var particle = particles[i]
 
-		particle.texture = texture
-		var p_dir: float = direction.angle()
-		var p_spread: float = deg_to_rad(rng.randf_range(-spread_degrees/2.0, spread_degrees/2.0))
-		if center_concentration > 0 and !rng.percent(percent_force_uniform):
-			p_spread *= rng.exponential(center_concentration)
-		p_dir += p_spread
-		var p_lifetime: float = lifetime - rng.randf_range(0.0, lifetime_randomness * lifetime) - lifetime * preprocess_amount
-		particle.max_distance = distance - rng.randf_range(0.0, distance_randomness * distance)
+	if texture:
+		for i in range(num_particles):
+			var particle = _create_particle()
+			particles.append(particle)
 
-		if distance_falloff_curve:
-			particle.max_distance *= (distance_falloff_curve.sample((abs(p_spread * 2) / deg_to_rad(spread_degrees))))
-		particle.dir = p_dir
-		particle.scale_modifier = 1.0 - rng.randf_range(0.0, image_scale_randomness)
-		particle.max_distance += start_radius
-		
-		var update_functions = _get_update_functions(particle)
+		# start burst
+		tween = create_tween()
+		tween.set_parallel(true)
 
-		update_method.bind(particle, update_functions).call(preprocess_amount if !reverse else 1.0)
-		tween.tween_method(update_method.bind(particle, update_functions), preprocess_amount if !reverse else 1.0, 1.0 if !reverse else preprocess_amount, p_lifetime).set_delay(0.0 if !reverse else lifetime - p_lifetime)
-		tween.tween_callback(particle.kill).set_delay(p_lifetime)
+		var update_method: Callable = _update_particle if !Engine.is_editor_hint() else _update_particle_editor
+	
+		for i in range(num_particles):
+			var particle = particles[i]
+
+			particle.texture = texture
+			var p_dir: float = direction.angle()
+			var p_spread: float = deg_to_rad(rng.randf_range(-spread_degrees/2.0, spread_degrees/2.0))
+			if center_concentration > 0 and !rng.percent(percent_force_uniform):
+				p_spread *= rng.exponential(center_concentration)
+			p_dir += p_spread
+			var p_lifetime: float = lifetime - rng.randf_range(0.0, lifetime_randomness * lifetime) - lifetime * preprocess_amount
+			particle.max_distance = distance - rng.randf_range(0.0, distance_randomness * distance)
+
+			if distance_falloff_curve:
+				particle.max_distance *= (distance_falloff_curve.sample((abs(p_spread * 2) / deg_to_rad(spread_degrees))))
+			particle.dir = p_dir
+			particle.scale_modifier = 1.0 - rng.randf_range(0.0, image_scale_randomness)
+			particle.max_distance += start_radius
+			
+			var update_functions = _get_update_functions(particle)
+
+			update_method.bind(particle, update_functions).call(preprocess_amount if !reverse else 1.0)
+			tween.tween_method(update_method.bind(particle, update_functions), preprocess_amount if !reverse else 1.0, 1.0 if !reverse else preprocess_amount, p_lifetime).set_delay(0.0 if !reverse else lifetime - p_lifetime)
+			tween.tween_callback(particle.kill).set_delay(p_lifetime)
 		
 	var timer = get_tree().create_timer(lifetime, false)
 	timer.timeout.connect(_finish)
