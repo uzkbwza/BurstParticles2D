@@ -110,6 +110,7 @@ var particles: Array[Particle] = []
 var rng = BurstParticlesRng.new()
 var shared_material = null
 var finished = true
+var t = 0.0 # time elapsed
 var tween
 var use_gradient_map:
 	get:
@@ -197,9 +198,12 @@ func burst():
 				particle.max_angle *= -1
 			
 			var update_functions = _get_update_functions(particle)
-
 			update_method.bind(particle, update_functions).call(preprocess_amount if !reverse else 1.0)
-			tween.tween_method(update_method.bind(particle, update_functions), preprocess_amount if !reverse else 1.0, 1.0 if !reverse else preprocess_amount, p_lifetime).set_delay(0.0 if !reverse else lifetime - p_lifetime)
+			var t_start = preprocess_amount if !reverse else 1.0
+			var t_end = 1.0 if !reverse else preprocess_amount
+			t = t_start
+			tween.tween_property(self, "t", t_end, lifetime)
+			tween.tween_method(update_method.bind(particle, update_functions), t_start, t_end, p_lifetime).set_delay(0.0 if !reverse else lifetime - p_lifetime)
 			tween.tween_callback(particle.kill).set_delay(p_lifetime)
 		
 	var timer = get_tree().create_timer(lifetime, false)
@@ -210,8 +214,6 @@ func burst():
 		timer.timeout.connect(burst)
 	elif free_when_finished:
 		timer.timeout.connect(queue_free)
-
-		
 
 func _finish():
 	if tween:
@@ -235,10 +237,15 @@ func _get_update_functions(particle):
 		update_functions.append(func(t, particle): particle.y_scale = y_scale_curve.sample_baked(t))
 	
 	if color_offset_curve and use_gradient_map:
-		update_functions.append(func(t, particle):
-			particle.color_offset = color_offset_curve.sample_baked(t)
-			RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", particle.color_offset)
-		)
+		if !share_material:
+			update_functions.append(func(t, particle):
+				particle.color_offset = color_offset_curve.sample_baked(t)
+				RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", particle.color_offset)
+			)
+		else:
+			update_functions.append(func(t, particle):
+				RenderingServer.material_set_param(particle.material.get_rid(), "color_offset", color_offset_curve.sample_baked(self.t))
+			)
 	
 	if alpha_curve:
 		update_functions.append(func(t, particle):
