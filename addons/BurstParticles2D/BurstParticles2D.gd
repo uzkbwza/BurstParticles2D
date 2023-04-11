@@ -15,6 +15,8 @@ class Particle extends RefCounted:
 	var max_distance: float = 0
 	var dir: float = 0
 	var angle: float = 0
+	var flip_angle: float = 0
+	var max_angle: float = 0
 	var material = null
 	var scale_modifier := 1.0
 	var x_scale := 1.0
@@ -56,9 +58,11 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export_category("Texture")
 @export var texture: Texture2D = preload("orb_small.png")
 @export var image_scale = 1.0
-@export var gradient : GradientTexture1D
 @export_range(0.0, 1.0) var image_scale_randomness = 0.0
-@export var angle_degrees = 0.0
+@export var gradient : GradientTexture1D
+@export_range(-360, 360.0, 1.0, "or_greater", "or_less") var angle_degrees = 0.0
+@export_range(0.0, 1.0) var angle_randomness = 0.0
+@export var randomly_flip_angle = false
 
 # enable this if you are using a lot of particles and experience a stutter on instancing. 
 # since instance uniforms aren't implemented in canvas_item shaders yet, each particle needs its own
@@ -178,6 +182,7 @@ func burst():
 				p_spread *= rng.exponential(center_concentration)
 			p_dir += p_spread
 			var p_lifetime: float = lifetime - rng.randf_range(0.0, lifetime_randomness * lifetime) - lifetime * preprocess_amount
+			var p_angle: float = deg_to_rad(angle_degrees - rng.randf_range(0.0, angle_randomness * angle_degrees))
 			particle.max_distance = distance - rng.randf_range(0.0, distance_randomness * distance)
 
 			if distance_falloff_curve:
@@ -185,7 +190,11 @@ func burst():
 			particle.dir = p_dir
 			particle.scale_modifier = 1.0 - rng.randf_range(0.0, image_scale_randomness)
 			particle.max_distance += start_radius
-			particle.angle = deg_to_rad(angle_degrees)
+			particle.angle = p_angle
+			particle.max_angle = p_angle
+			if randomly_flip_angle and rng.randi() % 2 == 0:
+				particle.angle *= -1
+				particle.max_angle *= -1
 			
 			var update_functions = _get_update_functions(particle)
 
@@ -257,7 +266,7 @@ func _get_update_functions(particle):
 	
 	if angle_curve:
 		update_functions.append(func(t, particle):
-			particle.angle = deg_to_rad(angle_degrees) * angle_curve.sample_baked(t)
+			particle.angle = particle.max_angle * angle_curve.sample_baked(t)
 		)
 	
 	if offset_curve:
