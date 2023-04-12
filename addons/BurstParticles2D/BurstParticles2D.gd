@@ -202,18 +202,21 @@ func burst():
 			particle.texture = texture
 			var p_dir: float = direction.angle()
 			var p_spread: float = deg_to_rad(rng.randf_range(-spread_degrees/2.0, spread_degrees/2.0))
+
 			if center_concentration > 0 and !rng.percent(percent_force_uniform):
 				p_spread *= rng.exponential(center_concentration)
 			p_dir += p_spread
+			print(p_spread)
 			var p_lifetime: float = lifetime - rng.randf_range(0.0, lifetime_randomness * lifetime) - lifetime * preprocess_amount
 			var p_angle: float = deg_to_rad(angle_degrees - rng.randf_range(0.0, angle_randomness * angle_degrees))
 			var p_dir_rotation: float = deg_to_rad(direction_rotation_degrees - rng.randf_range(0.0, direction_rotation_randomness * direction_rotation_degrees))
+			print(p_dir_rotation)
 			if randomly_flip_rotation and rng.randi() % 2 == 0:
 				p_dir_rotation *= -1
 			
 			particle.max_distance = distance - rng.randf_range(0.0, distance_randomness * distance)
 
-			if distance_falloff_curve:
+			if distance_falloff_curve and distance > 0:
 				particle.max_distance *= (distance_falloff_curve.sample((abs(p_spread * 2) / deg_to_rad(spread_degrees))))
 			particle.dir = p_dir
 			particle.start_dir = p_dir
