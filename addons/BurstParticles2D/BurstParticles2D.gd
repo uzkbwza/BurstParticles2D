@@ -206,11 +206,11 @@ func burst():
 			if center_concentration > 0 and !rng.percent(percent_force_uniform):
 				p_spread *= rng.exponential(center_concentration)
 			p_dir += p_spread
-			print(p_spread)
+
 			var p_lifetime: float = lifetime - rng.randf_range(0.0, lifetime_randomness * lifetime) - lifetime * preprocess_amount
 			var p_angle: float = deg_to_rad(angle_degrees - rng.randf_range(0.0, angle_randomness * angle_degrees))
 			var p_dir_rotation: float = deg_to_rad(direction_rotation_degrees - rng.randf_range(0.0, direction_rotation_randomness * direction_rotation_degrees))
-			print(p_dir_rotation)
+
 			if randomly_flip_rotation and rng.randi() % 2 == 0:
 				p_dir_rotation *= -1
 			
