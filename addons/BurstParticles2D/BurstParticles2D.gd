@@ -173,6 +173,11 @@ func burst():
 	
 
 	if texture:
+		current_shader = [
+			SHADER, 
+			SHADER_ADD
+		][blend_mode]
+
 		for i in range(num_particles):
 			var particle = _create_particle()
 			particles.append(particle)
@@ -184,11 +189,6 @@ func burst():
 		var update_method: Callable = _update_particle if !Engine.is_editor_hint() else _update_particle_editor
 
 		var update_functions = _get_update_functions()
-		
-		current_shader = [
-			SHADER, 
-			SHADER_ADD
-		][blend_mode]
 	
 		for i in range(num_particles):
 			var particle = particles[i]
