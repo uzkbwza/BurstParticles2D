@@ -3,7 +3,7 @@ render_mode blend_mix;
 
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
 uniform sampler2D gradient : hint_default_white;
-uniform float color_offset : hint_range(-1.0, 1.0, 0.1) = 0.0;
+uniform float color_offset : hint_range(-1.0, 1.0) = 0.0;
 
 void fragment() {
 	vec4 input_color = texture(TEXTURE, UV);

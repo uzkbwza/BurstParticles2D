@@ -20,6 +20,8 @@ class Particle extends RefCounted:
 	var distance: float = 0
 	var max_distance: float = 0
 	var dir: float = 0
+	var start_dir: float = 0
+	var end_dir: float = 0
 	var angle: float = 0
 	var flip_angle: float = 0
 	var max_angle: float = 0
@@ -83,6 +85,9 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export_category("Path")
 # launch direction
 @export var direction = Vector2(1, 0)
+@export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var direction_rotation_degrees = 0.0
+@export_range(0.0, 1.0) var direction_rotation_randomness = 0.0
+@export var randomly_flip_rotation = false
 @export_range(0.0, 4096, 0.001, "or_greater") var distance = 100.0
 @export_range(0.0, 1.0) var distance_randomness = 0.0
 @export var offset = Vector2(0, 0)
@@ -107,6 +112,7 @@ class BurstParticlesRng extends RandomNumberGenerator:
 
 @export_category("Tween Curves")
 @export var distance_curve : Curve = null
+@export var rotation_curve : Curve = null
 @export var offset_curve: Curve = null
 @export var angle_curve: Curve = null
 @export var scale_curve : Curve = null
@@ -201,17 +207,24 @@ func burst():
 			p_dir += p_spread
 			var p_lifetime: float = lifetime - rng.randf_range(0.0, lifetime_randomness * lifetime) - lifetime * preprocess_amount
 			var p_angle: float = deg_to_rad(angle_degrees - rng.randf_range(0.0, angle_randomness * angle_degrees))
+			var p_dir_rotation: float = deg_to_rad(direction_rotation_degrees - rng.randf_range(0.0, direction_rotation_randomness * direction_rotation_degrees))
+			if randomly_flip_rotation and rng.randi() % 2 == 0:
+				p_dir_rotation *= -1
+			
 			particle.max_distance = distance - rng.randf_range(0.0, distance_randomness * distance)
 
 			if distance_falloff_curve:
 				particle.max_distance *= (distance_falloff_curve.sample((abs(p_spread * 2) / deg_to_rad(spread_degrees))))
 			particle.dir = p_dir
+			particle.start_dir = p_dir
+			particle.end_dir = p_dir + p_dir_rotation
 			particle.scale_modifier = 1.0 - rng.randf_range(0.0, image_scale_randomness)
 			particle.max_distance += start_radius
 			particle.angle = p_angle
 			particle.max_angle = p_angle
 			particle.color_offset = color_offset_high
 			particle.offset = offset
+			
 			
 			if randomly_flip_angle and rng.randi() % 2 == 0:
 				particle.angle *= -1
@@ -290,7 +303,7 @@ func _get_update_functions():
 		update_functions.append(func(t, particle):
 			particle.distance = lerp(start_radius, particle.max_distance, t)
 		)
-	
+
 	if scale_curve:
 		update_functions.append(func(t, particle):
 			particle.scale = Vector2(image_scale * particle.x_scale, image_scale * particle.y_scale) * particle.scale_modifier * (scale_curve.sample_baked(particle.t) if scale_curve != null else 1.0)
@@ -319,6 +332,15 @@ func _get_update_functions():
 			update_functions.append(func(t, particle):
 				particle.offset = offset.rotated(-global_rotation)
 			)
+
+	if rotation_curve:
+		update_functions.append(func(t, particle):
+			particle.dir = lerp(particle.start_dir, particle.end_dir, rotation_curve.sample_baked(t))
+		)
+	else:
+		update_functions.append(func(t, particle):
+			particle.dir = lerp(particle.start_dir, particle.end_dir, t)
+		)
 
 	if align_sprite_rotation:
 		update_functions.append(func(_t, particle):

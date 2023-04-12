@@ -117,15 +117,13 @@ max_value = 2.82
 _data = [Vector2(0, 2.38418), 0.0, 0.0, 0, 0, Vector2(0.35958, 0.743454), 0.0, 0.0, 0, 0, Vector2(1, 0.589636), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="CanvasGroup" type="CanvasGroup"]
-
-[node name="MultiParticleExample" type="Node2D" parent="."]
+[node name="MultiParticleExample" type="Node2D"]
 rotation = 0.385718
-scale = Vector2(0.159, 0.159)
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_xgldk")
 metadata/_edit_group_ = true
 
-[node name="Ring" type="Node2D" parent="MultiParticleExample"]
+[node name="Ring" type="Node2D" parent="."]
 modulate = Color(1, 1, 1, 0.12549)
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
@@ -147,7 +145,7 @@ scale_curve = SubResource("Curve_0jfcr")
 y_scale_curve = SubResource("Curve_u2ur6")
 color_offset_curve = SubResource("Curve_jjlod")
 
-[node name="Orbs" type="Node2D" parent="MultiParticleExample"]
+[node name="Orbs" type="Node2D" parent="."]
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, 0)
@@ -161,6 +159,7 @@ texture = ExtResource("5_l8jsc")
 image_scale = 0.173
 image_scale_randomness = 0.7
 gradient = SubResource("GradientTexture1D_dvjid")
+direction_rotation_randomness = 1.0
 distance = 2115.85
 distance_randomness = 1.0
 offset = Vector2(0, -300)
@@ -173,7 +172,7 @@ x_scale_curve = SubResource("Curve_5vfn0")
 y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
-[node name="Cross" type="Node2D" parent="MultiParticleExample"]
+[node name="Cross" type="Node2D" parent="."]
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, -0.00012207)
@@ -195,7 +194,7 @@ x_scale_curve = SubResource("Curve_rvec0")
 y_scale_curve = SubResource("Curve_m8v4h")
 color_offset_curve = SubResource("Curve_8kxii")
 
-[node name="Ring2" type="Node2D" parent="MultiParticleExample"]
+[node name="Ring2" type="Node2D" parent="."]
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, 0.00012207)
@@ -216,7 +215,7 @@ scale_curve = SubResource("Curve_0jfcr")
 y_scale_curve = SubResource("Curve_u2ur6")
 color_offset_curve = SubResource("Curve_jjlod")
 
-[node name="Cross2" type="Node2D" parent="MultiParticleExample"]
+[node name="Cross2" type="Node2D" parent="."]
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, -0.00012207)
@@ -236,7 +235,7 @@ x_scale_curve = SubResource("Curve_pferf")
 y_scale_curve = SubResource("Curve_m8v4h")
 color_offset_curve = SubResource("Curve_8kxii")
 
-[node name="Orbs2" type="Node2D" parent="MultiParticleExample"]
+[node name="Orbs2" type="Node2D" parent="."]
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000488281, 0)
@@ -262,7 +261,7 @@ x_scale_curve = SubResource("Curve_tw41q")
 y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
-[node name="Orbs3" type="Node2D" parent="MultiParticleExample"]
+[node name="Orbs3" type="Node2D" parent="."]
 show_behind_parent = true
 material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000488281, 0)
@@ -290,9 +289,7 @@ x_scale_curve = SubResource("Curve_tw41q")
 y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
-[node name="Camera2D" type="Camera2D" parent="MultiParticleExample"]
-
-[node name="EmptyParticle" type="Node2D" parent="MultiParticleExample"]
+[node name="EmptyParticle" type="Node2D" parent="."]
 script = ExtResource("3_wh1l3")
 repeat = true
 texture = null
