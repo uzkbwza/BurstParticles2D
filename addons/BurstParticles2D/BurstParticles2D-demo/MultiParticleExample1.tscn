@@ -1,0 +1,297 @@
+[gd_scene load_steps=32 format=3 uid="uid://drwp60x7q7wtx"]
+
+[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_xgldk"]
+[ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_wh1l3"]
+[ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="4_rwjrl"]
+[ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="5_l8jsc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ej7wq"]
+
+[sub_resource type="Gradient" id="Gradient_j0q7a"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.275618, 0.936396, 1)
+colors = PackedColorArray(0.670039, 0.470735, 0.542787, 0, 0.670722, 0.725274, 0.916422, 1, 1, 1, 1, 1, 1, 0.805494, 0.80578, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rfxqi"]
+gradient = SubResource("Gradient_j0q7a")
+
+[sub_resource type="Curve" id="Curve_yj0yg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.173709, 0.527273), 3.03538, 2.28391, 1, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_0jfcr"]
+max_value = 34.85
+_data = [Vector2(0, 3.485), 0.0, 3.84848, 0, 0, Vector2(0.278768, 22.1773), 32.2923, 32.2923, 0, 0, Vector2(1, 34.85), 6.70619, 6.70619, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_u2ur6"]
+_data = [Vector2(0, 0.654545), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_jjlod"]
+_data = [Vector2(0, 1), 0.0, -4.45364, 0, 1, Vector2(0.187793, 0.163636), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.201471, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_k033r"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.223602, 0.47205, 0.812865, 1)
+colors = PackedColorArray(0.356863, 0.580392, 0.737255, 0, 0.87834, 0.46543, 0.362065, 0.839216, 1, 0.759812, 0.187012, 0.972359, 1, 0.930167, 0.403123, 1, 0.984314, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dvjid"]
+gradient = SubResource("Gradient_k033r")
+
+[sub_resource type="Curve" id="Curve_a5hih"]
+_data = [Vector2(0, 0), 0.0, 1.93319, 0, 0, Vector2(0.150413, 0.518182), 2.29167, 2.29167, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_amyxq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.881818), 2.73369, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3xxat"]
+max_value = 2.0
+_data = [Vector2(0, 0.927273), 0.0, 0.0, 0, 0, Vector2(0.547107, 0.236364), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5vfn0"]
+_data = [Vector2(0, 0.990909), 0.0, 0.0, 0, 0, Vector2(1, 0.663636), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k6dkk"]
+_data = [Vector2(0, 0.290909), 0.0, 0.0, 0, 0, Vector2(1, 0.745454), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_8y1cm"]
+_data = [Vector2(0, 0), 0.0, 8.69388, 0, 1, Vector2(0.115023, 1), -0.252569, -0.252569, 0, 0, Vector2(1, 0), -1.12997, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_eq34j"]
+offsets = PackedFloat32Array(0, 0.689046, 0.805654, 1)
+colors = PackedColorArray(1, 1, 1, 0, 0.964706, 0, 0.682353, 0.721569, 0.986606, 0.657213, 0.876707, 0.85002, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_mth2w"]
+gradient = SubResource("Gradient_eq34j")
+
+[sub_resource type="Curve" id="Curve_0aoqp"]
+_data = [Vector2(0, 0.309091), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_rvec0"]
+max_value = 2.0
+_data = [Vector2(0, 0.236364), 0.0, 0.0, 0, 0, Vector2(0.115702, 0.436364), 0.0, 0.0, 0, 0, Vector2(1, 0.981818), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_m8v4h"]
+_data = [Vector2(0, 0.436364), 0.0, -2.56667, 0, 0, Vector2(0.165289, 0.0727272), 0.0, 0.0, 0, 0, Vector2(0.290909, 0), 0.0, 0.0, 0, 0, Vector2(0.642975, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_8kxii"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.579812, -0.0181818), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_pferf"]
+max_value = 2.0
+_data = [Vector2(0, 0.236364), 0.0, 0.0, 0, 0, Vector2(0.115702, 1), 0.0, 0.0, 0, 0, Vector2(0.978512, 1.56364), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_qmkag"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.223602, 0.47205, 0.826087, 1)
+colors = PackedColorArray(0.356863, 0.580392, 0.737255, 0, 0.727482, 0.45374, 0.931954, 0.839216, 1, 0.723056, 0.682709, 0.972359, 0.757548, 0.993388, 0.703463, 1, 0.984314, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i0g4n"]
+gradient = SubResource("Gradient_qmkag")
+
+[sub_resource type="Curve" id="Curve_5ckfn"]
+max_value = 4.0
+_data = [Vector2(0, 2.36364), 0.0, 0.0, 0, 0, Vector2(0.0429752, 1.12727), 0.0, 0.0, 0, 0, Vector2(1, 1.09091), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_x6xd5"]
+_data = [Vector2(0, 0), 0.0, 4.13947, 0, 0, Vector2(0.265092, 0.772727), 0.692727, 0.692727, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_tw41q"]
+max_value = 2.82
+_data = [Vector2(0, 2.38418), 0.0, 0.0, 0, 0, Vector2(0.35958, 0.743454), 0.0, 0.0, 0, 0, Vector2(1, 0.589636), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="MultiParticleExample1" type="Node2D"]
+rotation = 0.385718
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_xgldk")
+metadata/_edit_group_ = true
+
+[node name="Ring" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.12549)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000976563, 0)
+script = ExtResource("3_wh1l3")
+num_particles = 1
+lifetime = 0.75
+repeat = true
+texture = ExtResource("4_rwjrl")
+image_scale = 0.667
+gradient = SubResource("GradientTexture1D_rfxqi")
+angle_degrees = 360.0
+distance = 0.0
+distance_randomness = 0.667
+global_offset = true
+percent_force_uniform = 27.778
+angle_curve = SubResource("Curve_yj0yg")
+scale_curve = SubResource("Curve_0jfcr")
+y_scale_curve = SubResource("Curve_u2ur6")
+color_offset_curve = SubResource("Curve_jjlod")
+
+[node name="Orbs" type="Node2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000976563, 0)
+script = ExtResource("3_wh1l3")
+num_particles = 32
+lifetime = 0.75
+lifetime_randomness = 0.745
+preprocess_amount = 0.023
+repeat = true
+texture = ExtResource("5_l8jsc")
+image_scale = 0.173
+image_scale_randomness = 0.7
+gradient = SubResource("GradientTexture1D_dvjid")
+direction_rotation_randomness = 1.0
+distance = 2115.85
+distance_randomness = 1.0
+offset = Vector2(0, -300)
+global_offset = true
+start_radius = 126.063
+distance_curve = SubResource("Curve_a5hih")
+offset_curve = SubResource("Curve_amyxq")
+scale_curve = SubResource("Curve_3xxat")
+x_scale_curve = SubResource("Curve_5vfn0")
+y_scale_curve = SubResource("Curve_k6dkk")
+color_offset_curve = SubResource("Curve_8y1cm")
+
+[node name="Cross" type="Node2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000976563, -0.00012207)
+script = ExtResource("3_wh1l3")
+num_particles = 1
+lifetime = 0.75
+repeat = true
+texture = ExtResource("5_l8jsc")
+image_scale = 11.455
+gradient = SubResource("GradientTexture1D_mth2w")
+blend_mode = 1
+direction = Vector2(0, 1)
+distance = 0.0
+distance_randomness = 0.667
+global_offset = true
+spread_degrees = 101.455
+percent_force_uniform = 27.778
+scale_curve = SubResource("Curve_0aoqp")
+x_scale_curve = SubResource("Curve_rvec0")
+y_scale_curve = SubResource("Curve_m8v4h")
+color_offset_curve = SubResource("Curve_8kxii")
+
+[node name="Ring2" type="Node2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000976563, 0.00012207)
+script = ExtResource("3_wh1l3")
+num_particles = 1
+lifetime = 0.75
+repeat = true
+texture = ExtResource("4_rwjrl")
+image_scale = 0.399
+gradient = SubResource("GradientTexture1D_rfxqi")
+angle_degrees = -360.0
+distance = 0.0
+distance_randomness = 0.667
+global_offset = true
+percent_force_uniform = 27.778
+angle_curve = SubResource("Curve_yj0yg")
+scale_curve = SubResource("Curve_0jfcr")
+y_scale_curve = SubResource("Curve_u2ur6")
+color_offset_curve = SubResource("Curve_jjlod")
+
+[node name="Cross2" type="Node2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000976563, -0.00012207)
+script = ExtResource("3_wh1l3")
+num_particles = 1
+lifetime = 0.75
+repeat = true
+texture = ExtResource("5_l8jsc")
+image_scale = 15.283
+gradient = SubResource("GradientTexture1D_mth2w")
+blend_mode = 1
+distance = 0.0
+global_offset = true
+spread_degrees = 6.545
+percent_force_uniform = 27.778
+scale_curve = SubResource("Curve_0aoqp")
+x_scale_curve = SubResource("Curve_pferf")
+y_scale_curve = SubResource("Curve_m8v4h")
+color_offset_curve = SubResource("Curve_8kxii")
+
+[node name="Orbs2" type="Node2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000488281, 0)
+script = ExtResource("3_wh1l3")
+num_particles = 24
+lifetime = 0.75
+lifetime_randomness = 0.789
+repeat = true
+texture = ExtResource("5_l8jsc")
+image_scale = 0.435
+image_scale_randomness = 0.666
+gradient = SubResource("GradientTexture1D_i0g4n")
+distance = 1100.0
+distance_randomness = 0.621
+offset = Vector2(0, -300)
+global_offset = true
+center_concentration = 26.452
+distance_falloff_curve = SubResource("Curve_5ckfn")
+distance_curve = SubResource("Curve_x6xd5")
+offset_curve = SubResource("Curve_amyxq")
+scale_curve = SubResource("Curve_3xxat")
+x_scale_curve = SubResource("Curve_tw41q")
+y_scale_curve = SubResource("Curve_k6dkk")
+color_offset_curve = SubResource("Curve_8y1cm")
+
+[node name="Orbs3" type="Node2D" parent="."]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
+position = Vector2(0.000488281, 0)
+script = ExtResource("3_wh1l3")
+num_particles = 24
+lifetime = 0.75
+lifetime_randomness = 0.789
+repeat = true
+texture = ExtResource("5_l8jsc")
+image_scale = 0.435
+image_scale_randomness = 0.666
+gradient = SubResource("GradientTexture1D_i0g4n")
+direction = Vector2(-1, 0)
+distance = 1100.0
+distance_randomness = 0.621
+offset = Vector2(0, -300)
+global_offset = true
+center_concentration = 26.452
+percent_force_uniform = 8.096
+distance_falloff_curve = SubResource("Curve_5ckfn")
+distance_curve = SubResource("Curve_x6xd5")
+offset_curve = SubResource("Curve_amyxq")
+scale_curve = SubResource("Curve_3xxat")
+x_scale_curve = SubResource("Curve_tw41q")
+y_scale_curve = SubResource("Curve_k6dkk")
+color_offset_curve = SubResource("Curve_8y1cm")
+
+[node name="EmptyParticle" type="Node2D" parent="."]
+script = ExtResource("3_wh1l3")
+repeat = true
+texture = null
