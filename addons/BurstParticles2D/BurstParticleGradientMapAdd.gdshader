@@ -9,7 +9,6 @@ void fragment() {
 	vec4 input_color = texture(TEXTURE, UV);
 	float value = (input_color.r + input_color.g + input_color.b) / 3.0;
 	vec4 output_color = texture(gradient, vec2(value + color_offset, value));
-	vec4 screen_color = texture(screen_texture, SCREEN_UV);
 	COLOR.rgb = output_color.rgb;
 	COLOR.a *= output_color.a;
 }
