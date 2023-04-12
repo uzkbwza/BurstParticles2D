@@ -174,7 +174,9 @@ func burst():
 		tween.set_parallel(true)
 
 		var update_method: Callable = _update_particle if !Engine.is_editor_hint() else _update_particle_editor
-	
+
+		var update_functions = _get_update_functions()
+		
 		for i in range(num_particles):
 			var particle = particles[i]
 
@@ -196,12 +198,13 @@ func burst():
 			particle.angle = p_angle
 			particle.max_angle = p_angle
 			particle.color_offset = color_offset_high
+			particle.offset = offset
 			
 			if randomly_flip_angle and rng.randi() % 2 == 0:
 				particle.angle *= -1
 				particle.max_angle *= -1
 			
-			var update_functions = _get_update_functions(particle)
+
 			update_method.bind(particle, update_functions).call(preprocess_amount if !reverse else 1.0)
 			var t_start = preprocess_amount if !reverse else 1.0
 			var t_end = 1.0 if !reverse else preprocess_amount
@@ -227,7 +230,7 @@ func _finish():
 	for particle in particles:
 		particle.kill()
 
-func _get_update_functions(particle):
+func _get_update_functions():
 	# determine all the functions needed for tweening this particle and return them in an array.
 	# this prevents redundant checking whether or not e.g. a curve is available for every parameter 
 	# of every particle every frame.
@@ -299,7 +302,6 @@ func _get_update_functions(particle):
 				particle.offset = (offset * offset_curve.sample_baked(t)).rotated(-global_rotation)
 			)
 	else:
-		particle.offset = offset
 		if global_offset:
 			update_functions.append(func(t, particle):
 				particle.offset = offset.rotated(-global_rotation)
