@@ -1,9 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://drwp60x7q7wtx"]
+[gd_scene load_steps=32 format=3 uid="uid://drwp60x7q7wtx"]
 
 [ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticleGroup2D.gd" id="1_xgldk"]
 [ext_resource type="Script" path="res://addons/BurstParticles2D/BurstParticles2D.gd" id="3_wh1l3"]
 [ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="4_rwjrl"]
 [ext_resource type="Texture2D" uid="uid://ovw18l4dc1fv" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb.png" id="5_l8jsc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ej7wq"]
 
 [sub_resource type="Gradient" id="Gradient_j0q7a"]
 interpolation_mode = 2
@@ -30,22 +32,6 @@ point_count = 1
 _data = [Vector2(0, 1), 0.0, -4.45364, 0, 1, Vector2(0.187793, 0.163636), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.201471, 0.0, 1, 0]
 point_count = 3
 
-[sub_resource type="Shader" id="Shader_4ich8"]
-code = "shader_type canvas_item;
-render_mode unshaded;
-uniform sampler2D gradient : hint_default_white;
-uniform float color_offset : hint_range(-1.0, 1.0, 0.1) = 0.0;
-
-void fragment() {
-	vec4 input_color = texture(TEXTURE, UV);
-	float value = (input_color.r + input_color.g + input_color.b) / 3.0;
-//	vec4 output_color = texture(gradient, vec2(smoothstep(0.0, 1.0, value) + color_offset, value));
-	vec4 output_color = texture(gradient, vec2(value + color_offset, value));
-	COLOR.rgb = output_color.rgb;
-	COLOR.a *= output_color.a;
-}
-"
-
 [sub_resource type="Gradient" id="Gradient_k033r"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.223602, 0.47205, 0.812865, 1)
@@ -53,11 +39,6 @@ colors = PackedColorArray(0.356863, 0.580392, 0.737255, 0, 0.87834, 0.46543, 0.3
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_dvjid"]
 gradient = SubResource("Gradient_k033r")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_67i43"]
-shader = SubResource("Shader_4ich8")
-shader_parameter/color_offset = 0.0
-shader_parameter/gradient = SubResource("GradientTexture1D_dvjid")
 
 [sub_resource type="Curve" id="Curve_a5hih"]
 _data = [Vector2(0, 0), 0.0, 1.93319, 0, 0, Vector2(0.150413, 0.518182), 2.29167, 2.29167, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -83,8 +64,6 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_8y1cm"]
 _data = [Vector2(0, 0), 0.0, 8.69388, 0, 1, Vector2(0.115023, 1), -0.252569, -0.252569, 0, 0, Vector2(1, 0), -1.12997, 0.0, 1, 0]
 point_count = 3
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pjcuo"]
 
 [sub_resource type="Gradient" id="Gradient_eq34j"]
 offsets = PackedFloat32Array(0, 0.689046, 0.805654, 1)
@@ -116,8 +95,6 @@ max_value = 2.0
 _data = [Vector2(0, 0.236364), 0.0, 0.0, 0, 0, Vector2(0.115702, 1), 0.0, 0.0, 0, 0, Vector2(0.978512, 1.56364), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q3rr"]
-
 [sub_resource type="Gradient" id="Gradient_qmkag"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.223602, 0.47205, 0.826087, 1)
@@ -140,15 +117,18 @@ max_value = 2.82
 _data = [Vector2(0, 2.38418), 0.0, 0.0, 0, 0, Vector2(0.35958, 0.743454), 0.0, 0.0, 0, 0, Vector2(1, 0.589636), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="MultiParticleExample" type="Node2D"]
+[node name="CanvasGroup" type="CanvasGroup"]
+
+[node name="MultiParticleExample" type="Node2D" parent="."]
 rotation = 0.385718
 scale = Vector2(0.159, 0.159)
 script = ExtResource("1_xgldk")
 metadata/_edit_group_ = true
 
-[node name="Ring" type="Node2D" parent="."]
+[node name="Ring" type="Node2D" parent="MultiParticleExample"]
 modulate = Color(1, 1, 1, 0.12549)
 show_behind_parent = true
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, 0)
 script = ExtResource("3_wh1l3")
 num_particles = 1
@@ -167,9 +147,9 @@ scale_curve = SubResource("Curve_0jfcr")
 y_scale_curve = SubResource("Curve_u2ur6")
 color_offset_curve = SubResource("Curve_jjlod")
 
-[node name="Orbs" type="Node2D" parent="."]
+[node name="Orbs" type="Node2D" parent="MultiParticleExample"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_67i43")
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, 0)
 script = ExtResource("3_wh1l3")
 num_particles = 32
@@ -193,9 +173,9 @@ x_scale_curve = SubResource("Curve_5vfn0")
 y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
-[node name="Cross" type="Node2D" parent="."]
+[node name="Cross" type="Node2D" parent="MultiParticleExample"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_pjcuo")
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, -0.00012207)
 script = ExtResource("3_wh1l3")
 num_particles = 1
@@ -215,9 +195,9 @@ x_scale_curve = SubResource("Curve_rvec0")
 y_scale_curve = SubResource("Curve_m8v4h")
 color_offset_curve = SubResource("Curve_8kxii")
 
-[node name="Ring2" type="Node2D" parent="."]
+[node name="Ring2" type="Node2D" parent="MultiParticleExample"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_pjcuo")
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, 0.00012207)
 script = ExtResource("3_wh1l3")
 num_particles = 1
@@ -236,9 +216,9 @@ scale_curve = SubResource("Curve_0jfcr")
 y_scale_curve = SubResource("Curve_u2ur6")
 color_offset_curve = SubResource("Curve_jjlod")
 
-[node name="Cross2" type="Node2D" parent="."]
+[node name="Cross2" type="Node2D" parent="MultiParticleExample"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_pjcuo")
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000976563, -0.00012207)
 script = ExtResource("3_wh1l3")
 num_particles = 1
@@ -256,9 +236,9 @@ x_scale_curve = SubResource("Curve_pferf")
 y_scale_curve = SubResource("Curve_m8v4h")
 color_offset_curve = SubResource("Curve_8kxii")
 
-[node name="Orbs2" type="Node2D" parent="."]
+[node name="Orbs2" type="Node2D" parent="MultiParticleExample"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_5q3rr")
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000488281, 0)
 script = ExtResource("3_wh1l3")
 num_particles = 24
@@ -282,9 +262,9 @@ x_scale_curve = SubResource("Curve_tw41q")
 y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
-[node name="Orbs3" type="Node2D" parent="."]
+[node name="Orbs3" type="Node2D" parent="MultiParticleExample"]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_5q3rr")
+material = SubResource("CanvasItemMaterial_ej7wq")
 position = Vector2(0.000488281, 0)
 script = ExtResource("3_wh1l3")
 num_particles = 24
@@ -310,9 +290,9 @@ x_scale_curve = SubResource("Curve_tw41q")
 y_scale_curve = SubResource("Curve_k6dkk")
 color_offset_curve = SubResource("Curve_8y1cm")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="MultiParticleExample"]
 
-[node name="EmptyParticle" type="Node2D" parent="."]
+[node name="EmptyParticle" type="Node2D" parent="MultiParticleExample"]
 script = ExtResource("3_wh1l3")
 repeat = true
 texture = null

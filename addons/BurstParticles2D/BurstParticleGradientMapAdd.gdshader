@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode blend_mix;
+render_mode blend_add;
 
 uniform sampler2D screen_texture : hint_screen_texture, filter_linear_mipmap;
 uniform sampler2D gradient : hint_default_white;

@@ -5,8 +5,14 @@ extends Node2D
 class_name BurstParticles2D
 
 const SHADER = preload("BurstParticleGradientMap.gdshader")
+const SHADER_ADD = preload("BurstParticleGradientMapAdd.gdshader")
 
 signal finished_burst
+
+enum BlendMode {
+	Mix,
+	Add,
+}
 
 class Particle extends RefCounted:
 	var rid: RID
@@ -60,6 +66,7 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export var image_scale = 1.0
 @export_range(0.0, 1.0) var image_scale_randomness = 0.0
 @export var gradient : GradientTexture1D
+@export var blend_mode = BlendMode.Mix
 @export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var angle_degrees = 0.0
 @export_range(0.0, 1.0) var angle_randomness = 0.0
 @export var randomly_flip_angle = false
@@ -111,6 +118,7 @@ class BurstParticlesRng extends RandomNumberGenerator:
 var particles: Array[Particle] = []
 var rng = BurstParticlesRng.new()
 var shared_material = null
+var current_shader = SHADER
 var finished = true
 var t = 0.0 # time elapsed
 var tween
@@ -142,7 +150,7 @@ func _ready():
 
 func _create_material():
 	var mat = ShaderMaterial.new()
-	mat.shader = SHADER
+	mat.shader = current_shader
 	mat.set_shader_parameter("gradient", gradient)
 	return mat
 
@@ -177,6 +185,11 @@ func burst():
 
 		var update_functions = _get_update_functions()
 		
+		current_shader = [
+			SHADER, 
+			SHADER_ADD
+		][blend_mode]
+	
 		for i in range(num_particles):
 			var particle = particles[i]
 
