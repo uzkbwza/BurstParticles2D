@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://d2lceccxwhwet" path="res://addons/BurstParticles2D/BurstParticles2D-demo/ring.png" id="5_5twkj"]
 [ext_resource type="Texture2D" uid="uid://dc67f1jdiu0tu" path="res://addons/BurstParticles2D/BurstParticles2D-demo/orb2.png" id="6_isgq0"]
 
-[sub_resource type="Gradient" id="Gradient_c7k7f"]
+[sub_resource type="Gradient" id="Gradient_bclkm"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.194529, 0.398176, 0.731707, 1)
 colors = PackedColorArray(1, 0.180392, 0.0705882, 0, 0.686275, 0.482353, 0.478431, 0.858824, 0.366124, 0.88341, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_o8dmu"]
-gradient = SubResource("Gradient_c7k7f")
+gradient = SubResource("Gradient_bclkm")
 
 [sub_resource type="Curve" id="Curve_c8u8r"]
 _data = [Vector2(0, 0), 0.0, 5.75758, 0, 0, Vector2(0.178947, 0.672727), 1.33724, 1.33724, 0, 0, Vector2(1, 1), 3.4668e-07, 0.0, 0, 0]
@@ -176,6 +176,7 @@ blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
 randomly_flip_angle = true
+share_material = true
 distance = 10000.0
 distance_randomness = 1.0
 start_radius = 1884.16
