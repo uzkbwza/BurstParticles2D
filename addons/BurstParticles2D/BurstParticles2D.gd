@@ -14,34 +14,35 @@ enum BlendMode {
 	Add,
 }
 
-class Particle extends RefCounted:
-	var rid: RID
-	var texture: Texture2D
-	var distance: float = 0
-	var max_distance: float = 0
-	var dir: float = 0
-	var start_dir: float = 0
-	var end_dir: float = 0
-	var angle: float = 0
-	var flip_angle: float = 0
-	var max_angle: float = 0
-	var material = null
-	var scale_modifier := 1.0
-	var x_scale := 1.0
-	var y_scale := 1.0
-	var alpha := 0.0
-	var dead = false
-	var color_offset := 0.0
-	var t := 0.0
-	var scale = 1.0
-	var position: Vector2:
-		get:
-			return Vector2.from_angle(dir) * distance + offset
-	var offset: Vector2 = Vector2()
-	
-	func kill():
-		RenderingServer.free_rid(self.rid)
-		dead = true
+#class Particle extends RefCounted:
+var arr_rid: Array[RID]
+var arr_texture: Array[Texture2D]
+var arr_distance: Array[float]
+var arr_max_distance: float = 0
+var arr_dir: float = 0
+var arr_start_dir: float = 0
+var arr_end_dir: float = 0
+var arr_angle: float = 0
+var arr_flip_angle: float = 0
+var arr_max_angle: float = 0
+var arr_material = null
+var arr_scale_modifier := 1.0
+var arr_x_scale := 1.0
+var arr_y_scale := 1.0
+var arr_alpha := 0.0
+var arr_dead = false
+var arr_color_offset := 0.0
+var arr_t := 0.0
+var arr_scale = 1.0
+var arr_position: Vector2
+var arr_offset: Vector2 = Vector2()
+
+func _get_particle_position(id: int) -> Vector2:
+		return Vector2.from_angle(arr_dir[id]) * arr_distance[id] + arr_offset[id]
+
+func _kill_particle(id: int) -> void:
+	RenderingServer.free_rid(self.rid)
+	dead = true
 
 class BurstParticlesRng extends RandomNumberGenerator:
 	func percent(percent: float) -> bool:
@@ -121,7 +122,8 @@ class BurstParticlesRng extends RandomNumberGenerator:
 @export var color_offset_curve : Curve = null
 @export var alpha_curve: Curve = null
 
-var particles: Array[Particle] = []
+var current_particle_id = 0
+
 var rng = BurstParticlesRng.new()
 var shared_material = null
 var current_shader = SHADER
@@ -134,8 +136,11 @@ var use_gradient_map:
 
 @onready var wait_for_siblings = get_parent() is BurstParticleGroup2D
 
-func _create_particle() -> Particle:
-	var particle: Particle = Particle.new()
+func _new_particle():
+	pass
+
+func _create_particle() -> int:
+	var particle: Particle = _new_particle()
 	var p_rid := RenderingServer.canvas_item_create()
 	RenderingServer.canvas_item_add_texture_rect(p_rid, Rect2(texture.get_size() / 2, texture.get_size()), texture)
 	particle.texture = texture
@@ -145,6 +150,7 @@ func _create_particle() -> Particle:
 		var p_material = _create_material() if !share_material else shared_material
 		RenderingServer.canvas_item_set_material(particle.rid, p_material)
 		particle.material = p_material
+	current_particle_id += 1
 	return particle
 
 func _ready() -> void:
