@@ -147,23 +147,23 @@ func _create_particle() -> Particle:
 		particle.material = p_material
 	return particle
 
-func _ready():
+func _ready() -> void:
 	rng.randomize()
 	if wait_for_siblings:
 		return
 	if autostart:
 		burst()
 
-func _create_material():
+func _create_material() -> ShaderMaterial:
 	var mat = ShaderMaterial.new()
 	mat.shader = current_shader
 	mat.set_shader_parameter("gradient", gradient)
 	return mat
 
-func _center_texture():
+func _center_texture() -> Vector2:
 	return Vector2(-texture.get_width(), -texture.get_height())
 
-func burst():
+func burst() -> void:
 	if !finished:
 		_finish()
 	
@@ -228,11 +228,9 @@ func burst():
 			particle.color_offset = color_offset_high
 			particle.offset = offset
 			
-			
 			if randomly_flip_angle and rng.randi() % 2 == 0:
 				particle.angle *= -1
 				particle.max_angle *= -1
-			
 
 			update_method.bind(particle, update_functions).call(preprocess_amount if !reverse else 1.0)
 			var t_start = preprocess_amount if !reverse else 1.0
@@ -251,7 +249,7 @@ func burst():
 	elif free_when_finished:
 		timer.timeout.connect(queue_free)
 
-func _finish():
+func _finish() -> void:
 	if tween:
 		tween.kill()
 	finished_burst.emit()
@@ -259,7 +257,7 @@ func _finish():
 	for particle in particles:
 		particle.kill()
 
-func _get_update_functions():
+func _get_update_functions() -> Array[Callable]:
 	# determine all the functions needed for tweening this particle and return them in an array.
 	# this prevents redundant checking whether or not e.g. a curve is available for every parameter 
 	# of every particle every frame.
@@ -355,18 +353,18 @@ func _get_update_functions():
 		)
 	return update_functions
 
-func _update_particle(t: float, particle: Particle, update_functions: Array[Callable]):
+func _update_particle(t: float, particle: Particle, update_functions: Array[Callable]) -> void:
 	particle.t = t
 	# havent extensively tested the performance benefit of doing it this way. it might actually be 
 	# worse. branchless though!
 	for function in update_functions:
 		function.call(t, particle)
 
-func _update_particle_editor(t: float, particle: Particle, update_functions: Array[Callable]):
+func _update_particle_editor(t: float, particle: Particle, update_functions: Array[Callable]) -> void:
 	if particle.dead:
 		return
 	_update_particle(t, particle, update_functions)
 
-func _exit_tree():
+func _exit_tree() -> void:
 	for particle in particles:
 		particle.kill()
