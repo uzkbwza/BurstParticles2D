@@ -54,57 +54,57 @@ class BurstParticlesRng extends RandomNumberGenerator:
 		return log(arg)/log(exp(1))
 
 @export_category("Particles")
-@export var num_particles = 10
-@export var lifetime = 1.0
-@export_range(0.0, 1.0) var lifetime_randomness = 0.0
-@export_range(0.0, 1.0) var preprocess_amount = 0.0
-@export var reverse = false
-@export var repeat = false
-@export var free_when_finished = true
-@export var autostart = true
+@export var num_particles := 10
+@export var lifetime := 1.0
+@export_range(0.0, 1.0) var lifetime_randomness := 0.0
+@export_range(0.0, 1.0) var preprocess_amount := 0.0
+@export var reverse := false
+@export var repeat := false
+@export var free_when_finished := true
+@export var autostart := true
 
 @export_category("Texture")
 @export var texture: Texture2D = preload("orb_small.png")
-@export var image_scale = 1.0
-@export_range(0.0, 1.0) var image_scale_randomness = 0.0
+@export var image_scale := 1.0
+@export_range(0.0, 1.0) var image_scale_randomness := 0.0
 @export var gradient : GradientTexture1D
-@export var blend_mode = BlendMode.Mix
-@export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var angle_degrees = 0.0
-@export_range(0.0, 1.0) var angle_randomness = 0.0
-@export var randomly_flip_angle = false
-@export_range(-1.0, 1.0) var color_offset_high = 0.0
-@export_range(-1.0, 1.0) var color_offset_low = -1.0
+@export var blend_mode := BlendMode.Mix
+@export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var angle_degrees := 0.0
+@export_range(0.0, 1.0) var angle_randomness := 0.0
+@export var randomly_flip_angle := false
+@export_range(-1.0, 1.0) var color_offset_high := 0.0
+@export_range(-1.0, 1.0) var color_offset_low := -1.0
 
 # enable this if you are using a lot of particles and experience a stutter on instancing. 
 # since instance uniforms aren't implemented in canvas_item shaders yet, each particle needs its own
 # material. the drawback to enabling this is that every particle will have the same gradient color 
 # offset, which looks less dynamic in most contexts. this will change as soon as instance uniforms 
 # are implemented assuming they work when used directly with canvas items (not nodes).
-@export var share_material = false
+@export var share_material := false
 
 @export_category("Path")
 # launch direction
-@export var direction = Vector2(1, 0)
-@export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var direction_rotation_degrees = 0.0
-@export_range(0.0, 1.0) var direction_rotation_randomness = 0.0
-@export var randomly_flip_rotation = false
-@export_range(0.0, 4096, 0.001, "or_greater") var distance = 100.0
-@export_range(0.0, 1.0) var distance_randomness = 0.0
-@export var offset = Vector2(0, 0)
-@export var global_offset = false
+@export var direction := Vector2(1, 0)
+@export_range(-360.0, 360.0, 0.5, "or_greater", "or_less") var direction_rotation_degrees := 0.0
+@export_range(0.0, 1.0) var direction_rotation_randomness := 0.0
+@export var randomly_flip_rotation := false
+@export_range(0.0, 4096, 0.001, "or_greater") var distance := 100.0
+@export_range(0.0, 1.0) var distance_randomness := 0.0
+@export var offset := Vector2(0, 0)
+@export var global_offset := false
 
 # point the sprite in the launch direction
-@export var align_sprite_rotation = true
-@export_range(0.0, 4096, 0.001, "or_greater", "or_less") var start_radius = 0.0
+@export var align_sprite_rotation := true
+@export_range(0.0, 4096, 0.001, "or_greater", "or_less") var start_radius := 0.0
 
 # width of the arc of possible launch angles
-@export_range(0, 360) var spread_degrees = 360.0
+@export_range(0, 360) var spread_degrees := 360.0
 
 # how closely particles tend to skew toward the center of the arc
-@export_range(0.0, 100.0) var center_concentration = 0.0
+@export_range(0.0, 100.0) var center_concentration := 0.0
 
 # how many particles ignore the above parameter
-@export_range(0.0, 100.0) var percent_force_uniform = 0.0
+@export_range(0.0, 100.0) var percent_force_uniform := 0.0
 
 # change how far particles will go depending on their angular distance from 
 # the launch direction
@@ -135,8 +135,8 @@ var use_gradient_map:
 @onready var wait_for_siblings = get_parent() is BurstParticleGroup2D
 
 func _create_particle() -> Particle:
-	var particle = Particle.new()
-	var p_rid = RenderingServer.canvas_item_create()
+	var particle: Particle = Particle.new()
+	var p_rid := RenderingServer.canvas_item_create()
 	RenderingServer.canvas_item_add_texture_rect(p_rid, Rect2(texture.get_size() / 2, texture.get_size()), texture)
 	particle.texture = texture
 	particle.rid = p_rid
@@ -169,14 +169,14 @@ func burst():
 	
 	finished = false
 	# init particles
+
 	if share_material and use_gradient_map:
 		shared_material = _create_material()
-		
+
 	for particle in particles:
 		particle.kill()
-	particles = []
 
-	
+	particles = []
 
 	if texture:
 		current_shader = [

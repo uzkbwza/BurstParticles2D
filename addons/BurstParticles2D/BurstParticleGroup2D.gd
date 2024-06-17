@@ -22,9 +22,13 @@ func _ready():
 		burst()
 
 func _on_child_entered_tree(child: Node):
-	child.tree_exited.connect(_on_child_exited_tree)
+	if !child.tree_exited.is_connected(_on_child_exited_tree):
+		child.tree_exited.connect(_on_child_exited_tree)
 	if child is BurstParticles2D:
-		child.finished_burst.connect(_on_child_finished)
+		if !child.finished_burst.is_connected(_on_child_finished):
+			child.finished_burst.connect(_on_child_finished)
+		if autostart or Engine.is_editor_hint():
+			burst()
 
 func update_children():
 	lifetime = 0
@@ -40,9 +44,10 @@ func burst():
 	finished = false
 	update_children()
 	for child in get_children():
-		if child is BurstParticles2D:
+		if child is BurstParticles2D and child.is_inside_tree():
 			child.burst()
-	get_tree().create_timer(lifetime, false).timeout.connect(_finish)
+	if is_inside_tree():
+		get_tree().create_timer(lifetime, false).timeout.connect(_finish)
 
 func _on_child_exited_tree():
 	if get_child_count() == 0 and !Engine.is_editor_hint():
