@@ -133,7 +133,12 @@ class BurstParticlesRng extends RandomNumberGenerator:
 # material. the drawback to enabling this is that every particle will have the same gradient color 
 # offset, which looks less dynamic in most contexts. this will change as soon as instance uniforms 
 # are implemented assuming they work when used directly with canvas items (not nodes).
-@export var share_material := false
+@export var share_material := false:
+	set(value):
+		share_material = value
+		arr_material.clear()
+		arr_material.resize(num_particles)
+		kill()
 
 @export_category("Path")
 # launch direction
@@ -196,7 +201,7 @@ func _create_particle() -> int:
 	arr_rid[p_id] = p_rid
 	RenderingServer.canvas_item_set_parent(p_rid, get_canvas_item())
 	if use_gradient_map:
-		var p_material = _create_material() if !share_material else shared_material
+		var p_material = (_create_material() if arr_material[p_id] == null else arr_material[p_id]) if !share_material else shared_material
 		RenderingServer.canvas_item_set_material(p_rid, p_material)
 		arr_material[p_id] = p_material
 

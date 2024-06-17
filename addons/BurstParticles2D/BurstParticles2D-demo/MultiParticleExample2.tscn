@@ -176,7 +176,6 @@ blend_mode = 1
 angle_degrees = 197.5
 angle_randomness = 1.0
 randomly_flip_angle = true
-share_material = true
 distance = 10000.0
 distance_randomness = 1.0
 start_radius = 1884.16
